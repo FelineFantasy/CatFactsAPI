@@ -9,7 +9,7 @@ CatFactsAPI — это простой и лёгкий REST API, построен
 ## 🚀 Возможности
 
 - ✅ Случайные факты о кошках
-- ✅ 49 уникальных фактов в базе
+- ✅ 100+ уникальных фактов в базе
 - ✅ Информация о длине факта
 - ✅ Логирование запросов с IP-адресом и временем
 - ✅ Автоматическая документация через Swagger UI
@@ -35,6 +35,8 @@ pip install -r requirements.txt
 
 ## 🏃 Запуск
 
+### Локальный запуск
+
 Запустите сервер с помощью Uvicorn:
 
 ```bash
@@ -42,6 +44,10 @@ uvicorn main:app --reload
 ```
 
 Сервер будет доступен по адресу: **http://localhost:8000**
+
+### Онлайн версия
+
+API уже развёрнут и доступен по адресу: **https://catfactsapi.onrender.com**
 
 ## 📡 API Endpoints
 
@@ -71,7 +77,12 @@ uvicorn main:app --reload
 
 ## 📖 Документация
 
-После запуска сервера автоматически генерируется интерактивная документация:
+Интерактивная документация доступна по адресу:
+
+- **Swagger UI:** https://catfactsapi.onrender.com/docs
+- **ReDoc:** https://catfactsapi.onrender.com/redoc
+
+При локальном запуске:
 
 - **Swagger UI:** http://localhost:8000/docs
 - **ReDoc:** http://localhost:8000/redoc
@@ -80,21 +91,21 @@ uvicorn main:app --reload
 
 ### cURL
 ```bash
-curl http://localhost:8000/fact
+curl https://catfactsapi.onrender.com/fact
 ```
 
 ### Python
 ```python
 import requests
 
-response = requests.get("http://localhost:8000/fact")
+response = requests.get("https://catfactsapi.onrender.com/fact")
 data = response.json()
 print(data["fact"])
 ```
 
 ### JavaScript (Fetch API)
 ```javascript
-fetch('http://localhost:8000/fact')
+fetch('https://catfactsapi.onrender.com/fact')
   .then(response => response.json())
   .then(data => console.log(data.fact));
 ```
