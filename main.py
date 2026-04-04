@@ -1,6 +1,7 @@
 import json
 import random
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 
 with open("facts.json", "r", encoding="utf-8") as f:
@@ -13,7 +14,7 @@ with open("breeds.json", "r", encoding="utf-8") as f:
 app = FastAPI(
     title="CatFactsAPI",
     description="Случайные факты о кошках на русском языке",
-    version="1.1.0",
+    version="1.1.1",
     contact={
         "name": "FelineFantasy",
         "email": "mailsalavata5@gmail.com",
@@ -22,11 +23,20 @@ app = FastAPI(
 )
 
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 @app.get("/")
 def info():
     return {
         "title": "CatFactsAPI",
-        "version": "1.1.0",
+        "version": "1.1.1",
         "total_facts": len(facts),
         "total_breeds": len(breeds),
         "docs": "https://catfactsapi.onrender.com/docs"
