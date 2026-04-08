@@ -14,7 +14,7 @@ with open("breeds.json", "r", encoding="utf-8") as f:
 app = FastAPI(
     title="CatFactsAPI",
     description="Случайные факты о кошках на русском языке",
-    version="1.1.1",
+    version="1.2.0",
     contact={
         "name": "FelineFantasy",
         "email": "mailsalavata5@gmail.com",
@@ -26,17 +26,16 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 
 @app.get("/")
-def info():
+async def info():
     return {
         "title": "CatFactsAPI",
-        "version": "1.1.1",
+        "version": "1.2.0",
         "total_facts": len(facts),
         "total_breeds": len(breeds),
         "docs": "https://catfactsapi.onrender.com/docs"
@@ -44,7 +43,7 @@ def info():
 
 
 @app.get("/fact")
-def random_fact():
+async def random_fact():
     ind = random.randint(0, len(facts) - 1)
     fact = facts[ind]
     return {
@@ -55,7 +54,7 @@ def random_fact():
 
 
 @app.get("/facts")
-def multiple_facts(limit: int = 1):
+async def multiple_facts(limit: int = 1):
     limit = max(1, min(limit, len(facts)))
     selected = random.sample(facts, limit)
     return {
@@ -66,7 +65,7 @@ def multiple_facts(limit: int = 1):
 
 
 @app.get("/fact/{fact_id}")
-def get_fact_by_id(fact_id: int):
+async def get_fact_by_id(fact_id: int):
     if 0 <= fact_id < len(facts):
         return {
             "fact": facts[fact_id],
@@ -77,21 +76,17 @@ def get_fact_by_id(fact_id: int):
 
 
 @app.get("/breed")
-def random_breed():
+async def random_breed():
     ind = random.randint(0, len(breeds) - 1)
     breed = breeds[ind]
     return {
-        "breed": breed["name"],
-        "country": breed["country"],
-        "origin": breed["origin"],
-        "coat": breed["coat"],
-        "pattern": breed["pattern"],
+        **breed,
         "id": ind
     }
 
 
 @app.get("/breeds")
-def multiple_breeds(limit: int = 5):
+async def multiple_breeds(limit: int = 5):
     limit = max(1, min(limit, len(breeds)))
     selected = random.sample(breeds, limit)
     return {
@@ -102,15 +97,20 @@ def multiple_breeds(limit: int = 5):
 
 
 @app.get("/breed/{breed_id}")
-def get_breed_by_id(breed_id: int):
+async def get_breed_by_id(breed_id: int):
     if 0 <= breed_id < len(breeds):
         breed = breeds[breed_id]
         return {
-            "breed": breed["name"],
-            "country": breed["country"],
-            "origin": breed["origin"],
-            "coat": breed["coat"],
-            "pattern": breed["pattern"],
+            **breed,
             "id": breed_id
         }
     return {"error": f"ID от 0 до {len(breeds) - 1}"}
+
+
+@app.get("/health")
+async def health():
+    return {
+        "status": "ok",
+        "facts": len(facts),
+        "breeds": len(breeds)
+    }
