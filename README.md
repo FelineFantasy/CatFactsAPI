@@ -1,105 +1,105 @@
 # 🐱 CatFactsAPI
 
-API для получения случайных фактов и информации о породах кошек на русском языке.
+API for getting random facts and information about cat breeds in English.
 
-## 📋 Описание
+## 📋 Description
 
-CatFactsAPI — это простой и лёгкий REST API, построенный на **FastAPI**, который возвращает случайные факты о кошках и информацию о породах. Идеально подходит для учебных проектов, тестовых приложений или просто для развлечения.
+CatFactsAPI is a simple and lightweight REST API built with **FastAPI** that returns random facts about cats and breed information. Perfect for educational projects, test applications, or just for fun.
 
-## 🚀 Возможности
+## 🚀 Features
 
-- ✅ Случайные факты о кошках
-- ✅ **100+ уникальных фактов** в базе
-- ✅ Информация о породах кошек
-- ✅ Получение факта или породы по ID
-- ✅ Информация о длине факта
-- ✅ Автоматическая документация через Swagger UI
-- ✅ **API на русском языке**
+- ✅ Random cat facts
+- ✅ **100+ unique facts** in the database
+- ✅ Cat breed information
+- ✅ Get fact or breed by ID
+- ✅ Fact length information
+- ✅ Automatic documentation via Swagger UI
+- ✅ **English-language API**
 
-## 📦 Установка
+## 📦 Installation
 
-### Требования
+### Requirements
 
 - Python 3.8+
 - pip
 
-### Шаги установки
+### Installation Steps
 
-1. Клонируйте репозиторий:
+1. Clone the repository:
 ```bash
 git clone https://github.com/FelineFantasy/CatFactsAPI
 cd CatFactsAPI
 ```
 
-2. Установите зависимости:
+2. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-## 🏃 Запуск
+## 🏃 Running
 
-### Локальный запуск
+### Local Run
 
-Запустите сервер с помощью Uvicorn:
+Start the server using Uvicorn:
 
 ```bash
 uvicorn main:app --reload
 ```
 
-Сервер будет доступен по адресу: **http://localhost:8000**
+The server will be available at: **http://localhost:8000**
 
-### Онлайн версия
+### Online Version
 
-API уже развёрнут и доступен по адресу: **https://catfactsapi.onrender.com**
+The API is already deployed and available at: **https://catfactsapi.onrender.com**
 
 ## 📡 API Endpoints
 
-### Факты о кошках
+### Cat Facts
 
-| Метод | Эндпоинт | Описание |
-|-------|----------|-----------|
-| GET | `/` | Информация об API |
-| GET | `/fact` | Случайный факт |
-| GET | `/facts?limit=5` | Несколько случайных фактов |
-| GET | `/fact/{id}` | Факт по ID (0–99) |
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/` | API information |
+| GET | `/fact` | Random fact |
+| GET | `/facts?limit=5` | Multiple random facts |
+| GET | `/fact/{id}` | Fact by ID (0–99) |
 
-### Породы кошек
+### Cat Breeds
 
-| Метод | Эндпоинт | Описание |
-|-------|----------|-----------|
-| GET | `/breed` | Случайная порода |
-| GET | `/breeds?limit=5` | Несколько пород |
-| GET | `/breed/{id}` | Порода по ID (0–9) |
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/breed` | Random breed |
+| GET | `/breeds?limit=5` | Multiple breeds |
+| GET | `/breed/{id}` | Breed by ID (0–9) |
 
-## 📖 Документация
+## 📖 Documentation
 
-Интерактивная документация доступна по адресу:
+Interactive documentation is available at:
 
 - **Swagger UI:** https://catfactsapi.onrender.com/docs
 - **ReDoc:** https://catfactsapi.onrender.com/redoc
 
-При локальном запуске:
+When running locally:
 
 - **Swagger UI:** http://localhost:8000/docs
 - **ReDoc:** http://localhost:8000/redoc
 
-## 🧪 Примеры использования
+## 🧪 Usage Examples
 
 ### cURL
 ```bash
-# Случайный факт
+# Random fact
 curl https://catfactsapi.onrender.com/fact
 
-# Случайная порода
+# Random breed
 curl https://catfactsapi.onrender.com/breed
 
-# 3 случайных факта
+# 3 random facts
 curl https://catfactsapi.onrender.com/facts?limit=3
 
-# Факт по ID
+# Fact by ID
 curl https://catfactsapi.onrender.com/fact/42
 
-# Порода по ID
+# Breed by ID
 curl https://catfactsapi.onrender.com/breed/5
 ```
 
@@ -107,12 +107,12 @@ curl https://catfactsapi.onrender.com/breed/5
 ```python
 import requests
 
-# Случайный факт
+# Random fact
 response = requests.get("https://catfactsapi.onrender.com/fact")
 data = response.json()
 print(data["fact"])
 
-# Случайная порода
+# Random breed
 response = requests.get("https://catfactsapi.onrender.com/breed")
 data = response.json()
 print(data["breed"], data["country"])
@@ -120,44 +120,44 @@ print(data["breed"], data["country"])
 
 ### JavaScript (Fetch API)
 ```javascript
-// Случайный факт
+// Random fact
 fetch('https://catfactsapi.onrender.com/fact')
   .then(response => response.json())
   .then(data => console.log(data.fact));
 
-// Случайная порода
+// Random breed
 fetch('https://catfactsapi.onrender.com/breed')
   .then(response => response.json())
   .then(data => console.log(data.breed, data.country));
 ```
 
-## 📁 Структура проекта
+## 📁 Project Structure
 
 ```
 CatFactsAPI/
-├── main.py           # Основной файл приложения
-├── facts.json        # База фактов о кошках (100+)
-├── breeds.json       # База пород кошек (10+)
-├── requirements.txt  # Зависимости проекта
-└── README.md         # Документация
+├── main.py           # Main application file
+├── facts.json        # Cat facts database (100+)
+├── breeds.json       # Cat breeds database (10+)
+├── requirements.txt  # Project dependencies
+└── README.md         # Documentation
 ```
 
-## 🛠 Технологии
+## 🛠 Technologies
 
-- **FastAPI** — современный веб-фреймворк для создания API
-- **Uvicorn** — ASGI сервер
-- **Render** — хостинг (живая версия)
+- **FastAPI** — Modern web framework for building APIs
+- **Uvicorn** — ASGI server
+- **Render** — Hosting (live version)
 
-## 📝 Лицензия
+## 📝 License
 
 MIT
 
-## 🔗 Ссылки
+## 🔗 Links
 
 - **API**: https://catfactsapi.onrender.com
-- **Документация**: https://catfactsapi.onrender.com/docs
+- **Documentation**: https://catfactsapi.onrender.com/docs
 - **GitHub**: https://github.com/FelineFantasy/CatFactsAPI
 
 ---
 
-Сделано с ❤️ для любителей кошек
+Made with ❤️ for cat lovers
