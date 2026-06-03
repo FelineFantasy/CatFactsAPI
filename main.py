@@ -109,4 +109,4 @@ async def get_breed_by_id(breed_id: int):
 
 @app.get("/health")
 async def health():
-    return {"status": "ok",}
+    return {"status": "ok"}
