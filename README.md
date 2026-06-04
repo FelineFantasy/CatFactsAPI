@@ -148,9 +148,10 @@ CatFactsAPI/
 - **Uvicorn** — ASGI server
 - **Render** — Hosting (live version)
 
-## 📝 License
+## 👤 Author
 
-MIT
+- **FelineFantasy**
+- **License**: MIT
 
 ## 🔗 Links
 
