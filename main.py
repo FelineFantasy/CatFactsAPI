@@ -110,3 +110,47 @@ async def get_breed_by_id(breed_id: int):
 @app.get("/health")
 async def health():
     return {"status": "ok"}
+
+
+@app.head("/")
+async def info_head():
+    return Response()
+
+
+@app.head("/fact")
+async def random_fact_head():
+    return Response()
+
+
+@app.head("/facts")
+async def multiple_facts_head():
+    return Response()
+
+
+@app.head("/fact/{fact_id}")
+async def get_fact_by_id_head(fact_id: int):
+    if 0 <= fact_id < len(facts):
+        return Response()
+    return Response(status_code=404)
+
+
+@app.head("/breed")
+async def random_breed_head():
+    return Response()
+
+
+@app.head("/breeds")
+async def multiple_breeds_head():
+    return Response()
+
+
+@app.head("/breed/{breed_id}")
+async def get_breed_by_id_head(breed_id: int):
+    if 0 <= breed_id < len(breeds):
+        return Response()
+    return Response(status_code=404)
+
+
+@app.head("/health")
+async def health_head():
+    return Response()
