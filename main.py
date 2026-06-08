@@ -38,6 +38,15 @@ async def info():
         "version": "1.2.0",
         "total_facts": len(facts),
         "total_breeds": len(breeds),
+        "endpoints": {
+            "/": "API info",
+            "/fact": "Random fact",
+            "/facts": "Multiple facts",
+            "/fact/{fact_id}": "Fact by ID",
+            "/breed": "Random breed",
+            "/breeds": "Multiple breeds",
+            "/breed/{breed_id}": "Breed by ID"
+        },
         "docs": "https://catfactsapi.onrender.com/docs"
     }
 
