@@ -135,11 +135,13 @@ fetch('https://catfactsapi.onrender.com/breed')
 
 ```
 CatFactsAPI/
-├── main.py           # Main application file
-├── facts.json        # Cat facts database (100+)
-├── breeds.json       # Cat breeds database (10+)
-├── requirements.txt  # Project dependencies
-└── README.md         # Documentation
+├── .github/
+│   └── FUNDING.yml           # Support link for DonationAlerts
+├── main.py                   # Main application file
+├── facts.json                # Cat facts database (100+)
+├── breeds.json               # Cat breeds database (10+)
+├── requirements.txt          # Project dependencies
+└── README.md                 # Documentation
 ```
 
 ## 🛠 Technologies
