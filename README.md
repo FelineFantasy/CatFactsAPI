@@ -140,8 +140,8 @@ CatFactsAPI/
 ├── .gitignore                # Git ignore file
 ├── LICENSE                   # MIT License
 ├── main.py                   # Main application file
-├── facts.json                # Cat facts database (100+)
-├── breeds.json               # Cat breeds database (10+)
+├── facts.json                # Cat facts database (350+)
+├── breeds.json               # Cat breeds database (100+)
 ├── requirements.txt          # Project dependencies
 └── README.md                 # Documentation
 ```
