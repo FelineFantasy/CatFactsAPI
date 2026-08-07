@@ -137,6 +137,8 @@ fetch('https://catfactsapi.onrender.com/breed')
 CatFactsAPI/
 ├── .github/
 │   └── FUNDING.yml           # Support link for DonationAlerts
+├── .gitignore                # Git ignore file
+├── LICENSE                   # MIT License
 ├── main.py                   # Main application file
 ├── facts.json                # Cat facts database (100+)
 ├── breeds.json               # Cat breeds database (10+)
