@@ -9,7 +9,7 @@ CatFactsAPI is a simple and lightweight REST API built with **FastAPI** that ret
 ## 🚀 Features
 
 - ✅ Random cat facts
-- ✅ **100+ unique facts** in the database
+- ✅ **350+ unique facts** in the database
 - ✅ Cat breed information
 - ✅ Get fact or breed by ID
 - ✅ Fact length information
