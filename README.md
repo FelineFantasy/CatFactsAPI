@@ -169,13 +169,3 @@ Every little bit is appreciated! ❤️
 
 - **FelineFantasy**
 - **License**: MIT
-
-## 🔗 Links
-
-- **API**: https://catfactsapi.onrender.com
-- **Documentation**: https://catfactsapi.onrender.com/docs
-- **GitHub**: https://github.com/FelineFantasy/CatFactsAPI
-
----
-
-Made with ❤️ for cat lovers
