@@ -1,14 +1,29 @@
+import sys
 import json
 import random
 from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
 
 
-with open("facts.json", "r", encoding="utf-8") as f:
-    facts = json.load(f)
+try:
+    with open("facts.json", "r", encoding="utf-8") as f:
+        facts = json.load(f)
+except FileNotFoundError:
+    print("Ошибка: файл facts.json не найден")
+    sys.exit(1)
+except json.JSONDecodeError:
+    print("Ошибка: файл facts.json имеет неверный формат JSON")
+    sys.exit(1)
 
-with open("breeds.json", "r", encoding="utf-8") as f:
-    breeds = json.load(f)
+try:
+    with open("breeds.json", "r", encoding="utf-8") as f:
+        breeds = json.load(f)
+except FileNotFoundError:
+    print("Ошибка: файл breeds.json не найден")
+    sys.exit(1)
+except json.JSONDecodeError:
+    print("Ошибка: файл breeds.json имеет неверный формат JSON")
+    sys.exit(1)
 
 
 app = FastAPI(
