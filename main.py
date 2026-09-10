@@ -1,7 +1,7 @@
 import sys
 import json
 import random
-from fastapi import FastAPI, Response
+from fastapi import FastAPI, Response, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 
@@ -29,12 +29,12 @@ except json.JSONDecodeError:
 app = FastAPI(
     title="CatFactsAPI",
     description="Случайные факты о кошках на русском языке",
-    version="1.2.0",
+    version="1.3.0",
     contact={
         "name": "FelineFantasy",
         "email": "mailsalavata5@gmail.com",
         "url": "https://github.com/FelineFantasy/CatFactsAPI",
-    }
+    },
 )
 
 
@@ -50,7 +50,7 @@ app.add_middleware(
 async def info():
     return {
         "title": "CatFactsAPI",
-        "version": "1.2.0",
+        "version": "1.3.0",
         "total_facts": len(facts),
         "total_breeds": len(breeds),
         "endpoints": {
@@ -60,9 +60,9 @@ async def info():
             "/fact/{fact_id}": "Fact by ID",
             "/breed": "Random breed",
             "/breeds": "Multiple breeds",
-            "/breed/{breed_id}": "Breed by ID"
+            "/breed/{breed_id}": "Breed by ID",
         },
-        "docs": "https://catfactsapi.onrender.com/docs"
+        "docs": "https://catfactsapi.onrender.com/docs",
     }
 
 
@@ -70,111 +70,55 @@ async def info():
 async def random_fact():
     ind = random.randint(0, len(facts) - 1)
     fact = facts[ind]
-    return {
-        "fact": fact,
-        "id": ind,
-        "length": len(fact)
-    }
+    return {"fact": fact, "id": ind, "length": len(fact)}
 
 
 @app.get("/facts")
 async def multiple_facts(limit: int = 1):
     limit = max(1, min(limit, len(facts)))
     selected = random.sample(facts, limit)
-    return {
-        "facts": selected,
-        "count": limit,
-        "total": len(facts)
-    }
+    return {"facts": selected, "count": limit, "total": len(facts)}
 
 
 @app.get("/fact/{fact_id}")
 async def get_fact_by_id(fact_id: int):
-    if 0 <= fact_id < len(facts):
-        return {
-            "fact": facts[fact_id],
-            "id": fact_id,
-            "length": len(facts[fact_id])
-        }
-    return {"error": f"ID от 0 до {len(facts) - 1}"}
+    if not 0 <= fact_id < len(facts):
+        raise HTTPException(
+            status_code=404,
+            detail=f"Факт с ID={fact_id} не найден. Доступный диапазон: 0..{len(facts) - 1}",
+        )
+    return {
+        "fact": facts[fact_id],
+        "id": fact_id,
+        "length": len(facts[fact_id]),
+    }
 
 
 @app.get("/breed")
 async def random_breed():
     ind = random.randint(0, len(breeds) - 1)
     breed = breeds[ind]
-    return {
-        **breed,
-        "id": ind
-    }
+    return {**breed, "id": ind}
 
 
 @app.get("/breeds")
 async def multiple_breeds(limit: int = 5):
     limit = max(1, min(limit, len(breeds)))
     selected = random.sample(breeds, limit)
-    return {
-        "breeds": selected,
-        "count": limit,
-        "total": len(breeds)
-    }
+    return {"breeds": selected, "count": limit, "total": len(breeds)}
 
 
 @app.get("/breed/{breed_id}")
 async def get_breed_by_id(breed_id: int):
-    if 0 <= breed_id < len(breeds):
-        breed = breeds[breed_id]
-        return {
-            **breed,
-            "id": breed_id
-        }
-    return {"error": f"ID от 0 до {len(breeds) - 1}"}
+    if not 0 <= breed_id < len(breeds):
+        raise HTTPException(
+            status_code=404,
+            detail=f"Порода с ID={breed_id} не найдена. Доступный диапазон: 0..{len(breeds) - 1}",
+        )
+    breed = breeds[breed_id]
+    return {**breed, "id": breed_id}
 
 
 @app.get("/health")
 async def health():
     return {"status": "ok"}
-
-
-@app.head("/")
-async def info_head():
-    return Response()
-
-
-@app.head("/fact")
-async def random_fact_head():
-    return Response()
-
-
-@app.head("/facts")
-async def multiple_facts_head():
-    return Response()
-
-
-@app.head("/fact/{fact_id}")
-async def get_fact_by_id_head(fact_id: int):
-    if 0 <= fact_id < len(facts):
-        return Response()
-    return Response(status_code=404)
-
-
-@app.head("/breed")
-async def random_breed_head():
-    return Response()
-
-
-@app.head("/breeds")
-async def multiple_breeds_head():
-    return Response()
-
-
-@app.head("/breed/{breed_id}")
-async def get_breed_by_id_head(breed_id: int):
-    if 0 <= breed_id < len(breeds):
-        return Response()
-    return Response(status_code=404)
-
-
-@app.head("/health")
-async def health_head():
-    return Response()
