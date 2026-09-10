@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+"""
+CatFactsAPI - FastAPI service for random cat facts and breeds
+"""
+
 import sys
 import json
 import random
