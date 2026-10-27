@@ -173,3 +173,5 @@ Every little bit is appreciated! ❤️
 fix: update readme
 
 chore: cleanup
+
+feat: add feature
